@@ -49,16 +49,7 @@ class PostController extends Controller
         $post = new Post();
         $post->fill($form_data);
 
-        $slug = Str::slug($post->title);
-        $slug_base = $slug;
-
-        $existingPost = Post::where('slug', $slug)->first();
-        $counter = 1;
-        while ($existingPost) {
-            $slug = $slug_base . '_' . $counter;
-            $counter++;
-            $existingPost = Post::where('slug', $slug)->first();
-        }
+        $slug = $this->getSlug($post->title);
         $post->slug = $slug;
         $post->save();
 
