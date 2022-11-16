@@ -41,10 +41,8 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate([
-            'title' => 'required|min:5|max:255',
-            'content' => 'required'
-        ]);
+        $this->validatePost($request);
+
         $form_data = $request->all();
         $post = new Post();
         $post->fill($form_data);
@@ -90,10 +88,7 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
-        $request->validate([
-            'title' => 'required|min:5|max:255',
-            'content' => 'required'
-        ]);
+        $this->validatePost($request);
 
         $form_data = $request->all();
 
@@ -134,5 +129,19 @@ class PostController extends Controller
         }
 
         return $slug;
+    }
+
+    private function validatePost(Request $request)
+    {
+        $request->validate([
+            'title' => 'required|min:5|max:255',
+            'content' => 'required'
+        ], [
+            'required' => ':attribute is mandatory',
+            'min' => ':attribute should be at least :min chars',
+            'max' => ':attribute should have max length :max chars'
+        ]);
+
+        return $request;
     }
 }
