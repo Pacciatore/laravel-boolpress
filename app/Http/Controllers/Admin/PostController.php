@@ -110,4 +110,20 @@ class PostController extends Controller
     {
         //
     }
+
+    private function getSlug($title)
+    {
+        $slug = Str::slug($title);
+        $slug_base = $slug;
+
+        $existingPost = Post::where('slug', $slug)->first();
+        $counter = 1;
+        while ($existingPost) {
+            $slug = $slug_base . '_' . $counter;
+            $counter++;
+            $existingPost = Post::where('slug', $slug)->first();
+        }
+
+        return $slug;
+    }
 }
