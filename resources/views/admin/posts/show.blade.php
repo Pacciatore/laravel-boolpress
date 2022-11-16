@@ -8,7 +8,7 @@
         <a href="{{ route('admin.posts.edit', $post->id) }}">Edit Post</a>
     </div>
 
-    <div class="ps-5">
+    <div>
         <a href="{{ route('admin.posts.index') }}">Back to Posts</a>
     </div>
 @endsection
