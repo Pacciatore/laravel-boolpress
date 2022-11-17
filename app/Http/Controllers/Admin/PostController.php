@@ -138,11 +138,13 @@ class PostController extends Controller
     {
         $request->validate([
             'title' => 'required|min:5|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'nullable|exists:categories,id'
         ], [
             'required' => ':attribute is mandatory',
             'min' => ':attribute should be at least :min chars',
-            'max' => ':attribute should have max length :max chars'
+            'max' => ':attribute should have max length :max chars',
+            'category_id.exists' => 'Category doesn\'t exist anymore :('
         ]);
 
         return $request;
