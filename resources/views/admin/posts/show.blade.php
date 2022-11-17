@@ -2,6 +2,7 @@
 
 @section('content')
     <h1> {{ $post->title }} </h1>
+    <h4> {{ $post->category ? $post->category->name : 'Nessuna categoria' }} </h4>
     <p> {{ $post->content }} </p>
 
     <div class="mt-5">
