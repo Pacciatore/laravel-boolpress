@@ -12,9 +12,9 @@
     <form action="{{ route('admin.posts.store') }}" method="POST">
         @csrf
 
-        <div @error('title')
-            class="is-invalid"
-        @enderror>
+        {{-- Titolo post --}}
+        <div @error('title') class="is-invalid" @enderror>
+
             <label for="title">Titolo: </label>
             <input type="text" name="title" required minlength="5" maxlength="255" value="{{ old('title', '') }}">
 
@@ -24,9 +24,22 @@
 
         </div>
 
-        <div @error('content')
-            class="is-invalid"
-        @enderror>
+        {{-- Categoria post --}}
+        <div>
+
+            <label for="category_id">Categoria: </label>
+            <select name="category_id">
+                <option value="">Nessuna categoria</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                @endforeach
+            </select>
+
+        </div>
+
+        {{-- Contenuto del post --}}
+        <div @error('content') class="is-invalid" @enderror>
+
             <label for="content">Contenuto: </label>
             <textarea name="content" required cols="30" rows="10">{{ old('content', '') }}</textarea>
 
@@ -36,6 +49,7 @@
 
         </div>
 
+        {{-- Invio del form --}}
         <div>
             <input type="submit" value="Crea">
         </div>
