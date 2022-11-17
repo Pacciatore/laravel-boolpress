@@ -14,9 +14,9 @@
         @csrf
         @method('PATCH')
 
-        <div @error('title')
-            class="is-invalid"
-        @enderror>
+        {{-- Titolo del post --}}
+        <div @error('title') class="is-invalid" @enderror>
+
             <label for="title">Titolo: </label>
             <input type="text" name="title" required minlength="5" maxlength="255"
                 value="{{ old('title', $post['title']) }}">
@@ -27,9 +27,29 @@
 
         </div>
 
-        <div @error('content')
-            class="is-invalid"
-        @enderror>
+        {{-- Categoria post --}}
+        <div @error('category_id') class="is-invalid" @enderror>
+
+            <label for="category_id">Categoria: </label>
+            <select name="category_id">
+                <option value="">Nessuna categoria</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}"
+                        {{ $category->id == old('category_id', $post->category_id) ? 'selected' : '' }}>
+                        {{ $category->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            @error('category_id')
+                <div class="text-danger"> {{ $message }} </div>
+            @enderror
+
+        </div>
+
+        {{-- Contenuto del post --}}
+        <div @error('content') class="is-invalid" @enderror>
+
             <label for="content">Contenuto: </label>
             <textarea name="content" required cols="30" rows="10">{{ old('content', $post['content']) }}</textarea>
 
@@ -39,10 +59,12 @@
 
         </div>
 
+        {{-- Invio form --}}
         <div>
             <input type="submit" value="Aggiorna">
         </div>
 
+        {{-- Ritorno alla vista dei post --}}
         <div>
             <a href="{{ route('admin.posts.show', $post->id) }}">Back to Post</a>
         </div>
