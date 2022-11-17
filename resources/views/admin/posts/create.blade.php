@@ -25,7 +25,7 @@
         </div>
 
         {{-- Categoria post --}}
-        <div>
+        <div @error('category_id') class="is-invalid" @enderror>
 
             <label for="category_id">Categoria: </label>
             <select name="category_id">
