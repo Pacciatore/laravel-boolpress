@@ -55,6 +55,19 @@
 
         </div>
 
+        {{-- Checkbox dei tag --}}
+        <div @error('tags') class="is-invalid" @enderror>
+
+            <label>Tags: </label>
+
+            @foreach ($tags as $tag)
+                <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                    {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                <label>{{ $tag->name }}</label>
+            @endforeach
+
+        </div>
+
         {{-- Invio del form --}}
         <div>
             <input type="submit" value="Crea">
