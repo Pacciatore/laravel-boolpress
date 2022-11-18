@@ -14,6 +14,16 @@
         <a href="{{ route('admin.categories.edit', $category->id) }}">Edit Category</a>
     </div>
 
+    <div class="mt-2">
+        <form action="{{ route('admin.categories.destroy', $category->id) }}" method="POST">
+            @csrf
+            @method('DELETE')
+
+            <input onclick="confirm('Are you sure?')" class="btn-danger" type="submit" value="Delete Category">
+        </form>
+
+    </div>
+
     <div>
         <a href="{{ route('admin.categories.index') }}">Back to Categories</a>
     </div>
