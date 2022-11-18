@@ -25,16 +25,11 @@
     </div>
 
     <div class="mt-2">
-        <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
+        <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
             @csrf
             @method('DELETE')
-            {{--
-            TODO:
-                Bugfix:
-                    Quando appare il confirm, la scelta non si pone perché il post
-                    viene eliminato lo stesso
-            --}}
-            <input onclick="confirm('Are you sure?')" type="submit" value="Delete Post">
+
+            <input type="submit" value="Delete Post">
         </form>
     </div>
 
