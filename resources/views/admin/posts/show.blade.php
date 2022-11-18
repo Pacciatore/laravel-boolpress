@@ -2,7 +2,15 @@
 
 @section('content')
     <h1> {{ $post->title }} </h1>
-    <h4> {{ $post->category ? $post->category->name : 'Nessuna categoria' }} </h4>
+
+    @if ($post->category)
+        <a href="{{ route('admin.categories.show', $post->category->id) }}">
+            {{ $post->category->name }}
+        </a>
+    @else
+        <p>Nessuna categoria</p>
+    @endif
+
     <p> {{ $post->content }} </p>
 
     <div class="tags">
