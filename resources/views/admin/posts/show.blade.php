@@ -5,6 +5,13 @@
     <h4> {{ $post->category ? $post->category->name : 'Nessuna categoria' }} </h4>
     <p> {{ $post->content }} </p>
 
+    <div class="tags">
+        Tags:
+        @foreach ($post->tags as $tag)
+            <span>{{ $tag->name }}</span>
+        @endforeach
+    </div>
+
     <div class="mt-5">
         <a href="{{ route('admin.posts.edit', $post->id) }}">Edit Post</a>
     </div>
@@ -13,6 +20,12 @@
         <form action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
             @csrf
             @method('DELETE')
+            {{--
+            TODO:
+                Bugfix:
+                    Quando appare il confirm, la scelta non si pone perché il post
+                    viene eliminato lo stesso
+            --}}
             <input onclick="confirm('Are you sure?')" type="submit" value="Delete Post">
         </form>
     </div>
