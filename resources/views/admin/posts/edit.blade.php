@@ -59,6 +59,30 @@
 
         </div>
 
+        {{-- Checkbox dei tag --}}
+        @if ($errors->any())
+            {{-- Qua trattiamo i dati presenti nel form rimbalzato --}}
+            <div @error('tags') class="is-invalid" @enderror>
+                <label>Tags: </label>
+
+                @foreach ($tags as $tag)
+                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                        {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }}>
+                    <label>{{ $tag->name }}</label>
+                @endforeach
+            </div>
+        @else
+            {{-- Qua trattiamo i dati presenti nella tabella Tags --}}
+            <div>
+                <label>Tags: </label>
+                @foreach ($tags as $tag)
+                    <input type="checkbox" name="tags[]" value="{{ $tag->id }}"
+                        {{ $post->tags->contains($tag) ? 'checked' : '' }}>
+                    <label>{{ $tag->name }}</label>
+                @endforeach
+            </div>
+        @endif
+
         {{-- Invio form --}}
         <div>
             <input type="submit" value="Aggiorna">
