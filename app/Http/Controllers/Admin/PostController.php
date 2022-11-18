@@ -169,7 +169,5 @@ class PostController extends Controller
             'max' => ':attribute should have max length :max chars',
             'category_id.exists' => 'Category doesn\'t exist anymore :('
         ]);
-
-        return $request;
     }
 }
