@@ -15,6 +15,8 @@ class TagController extends Controller
     public function index()
     {
         //
+        return view('admin.tags.index');
+    }
 
     /**
      * Show the form for creating a new resource.
