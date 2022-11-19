@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Tag;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Tag;
+use Illuminate\Support\Str;
 
 class TagController extends Controller
 {
@@ -29,6 +30,7 @@ class TagController extends Controller
     public function create()
     {
         //
+        return view('admin.tags.create');
     }
 
     /**
@@ -40,6 +42,17 @@ class TagController extends Controller
     public function store(Request $request)
     {
         //
+        $this->validateTag($request);
+        $form_data = $request->all();
+        $tag = new Tag();
+        $tag->fill($form_data);
+
+        $slug = $this->getSlug($tag->name);
+        $tag->slug = $slug;
+
+        $tag->save();
+
+        return redirect()->route('admin.tags.show', $tag->id);
     }
 
     /**
@@ -86,5 +99,31 @@ class TagController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getSlug($name)
+    {
+        $slug = Str::slug($name);
+        $slug_base = $slug;
+
+        $existingTag = Tag::where('slug', $slug)->first();
+        $counter = 1;
+        while ($existingTag) {
+            $slug = $slug_base . '_' . $counter;
+            $counter++;
+            $existingTag = Tag::where('slug', $slug)->first();
+        }
+
+        return $slug;
+    }
+
+    private function validateTag(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|max:30'
+        ], [
+            'required' => 'Il campo è obbligatorio',
+            'max' => 'Il nome non può superare i :max caratteri'
+        ]);
     }
 }

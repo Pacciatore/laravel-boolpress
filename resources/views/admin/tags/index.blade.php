@@ -3,7 +3,7 @@
 @section('content')
     <div class="row mb-5">
         <div class="col-12">
-            <a href="{{ route('admin.tags.create') }}">Nuovo Tag</a> [Work in Progress]
+            <a href="{{ route('admin.tags.create') }}">Nuovo Tag</a>
         </div>
     </div>
 
