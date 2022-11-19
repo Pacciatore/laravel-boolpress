@@ -72,6 +72,11 @@
         <div @error('image') class="is-invalid" @enderror>
             <label for="image">Carica immagine: </label>
             <input type="file" name="image">
+
+            @error('image')
+                <div class="text-danger"> {{ $message }} </div>
+            @enderror
+
         </div>
 
         {{-- Invio del form --}}
