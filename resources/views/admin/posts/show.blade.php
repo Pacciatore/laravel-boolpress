@@ -16,24 +16,26 @@
     <div class="tags">
         Tags:
         @foreach ($post->tags as $tag)
-            <span>{{ $tag->name }}</span>
+            <span> <a href="{{ route('admin.tags.show', $tag->id) }}">{{ $tag->name }}</a></span>
         @endforeach
     </div>
 
+    {{-- Pulsante edit --}}
     <div class="mt-5">
-        <a href="{{ route('admin.posts.edit', $post->id) }}">Edit Post</a>
+        <a class="btn-secondary p-2" href="{{ route('admin.posts.edit', $post->id) }}">Edit Post</a>
     </div>
 
+    {{-- Pulsante per l'eliminazione di un post --}}
     <div class="mt-2">
         <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
             @csrf
             @method('DELETE')
 
-            <input type="submit" value="Delete Post">
+            <input class="btn-danger" type="submit" value="Delete Post">
         </form>
     </div>
 
-    <div>
-        <a href="{{ route('admin.posts.index') }}">Back to Posts</a>
+    <div class="mt-2">
+        <a class="btn-primary p-2" href="{{ route('admin.posts.index') }}">Back to Posts</a>
     </div>
 @endsection
