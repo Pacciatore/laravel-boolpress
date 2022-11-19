@@ -127,6 +127,15 @@ class PostController extends Controller
             $post->tags()->sync([]);
         }
 
+        // Memorizzo in db il path all'immagine
+        if (array_key_exists('image', $form_data)) {
+            // Elimino l'immagine già presente, se esiste
+            if ($post->cover_path) {
+                Storage::delete($post->cover_path);
+            }
+            $cover_path = Storage::put('post_covers', $form_data['image']);
+            $form_data['cover_path'] = $cover_path;
+        }
 
         $post->update($form_data);
         return redirect()->route('admin.posts.show', $post->id);
@@ -143,7 +152,9 @@ class PostController extends Controller
         //
         // Elimino le relazioni prima di eliminare il post
         $post->tags()->sync([]);
-
+        if ($post->cover_path) {
+            Storage::delete($post->cover_path);
+        }
         $post->delete();
 
         return redirect()->route('admin.posts.index');

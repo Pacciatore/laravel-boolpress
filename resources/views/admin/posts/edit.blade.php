@@ -10,7 +10,7 @@
     @endif
 
 
-    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST">
+    <form action="{{ route('admin.posts.update', $post->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
 
@@ -58,6 +58,25 @@
             @enderror
 
         </div>
+
+        {{-- Immagine del post --}}
+        <div>
+            <div @error('image') class="is-invalid" @enderror>
+                <label for="image">Carica immagine: </label>
+                <input type="file" name="image">
+            </div>
+            @if ($post->cover_path)
+                <div class="img-container">
+                    <img class="img-fluid" src="{{ asset('storage/' . $post->cover_path) }}" alt="{{ $post->title }}">
+                </div>
+            @endif
+
+            @error('image')
+                <div class="text-danger"> {{ $message }} </div>
+            @enderror
+
+        </div>
+
 
         {{-- Checkbox dei tag --}}
         @if ($errors->any())
