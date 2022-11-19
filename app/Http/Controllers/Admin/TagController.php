@@ -73,9 +73,10 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Tag $tag)
     {
         //
+        return view('admin.tags.edit', compact('tag'));
     }
 
     /**
@@ -85,9 +86,20 @@ class TagController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Tag $tag)
     {
         //
+        $this->validateTag($request);
+        $form_data = $request->all();
+
+        if ($tag->name != $form_data['name']) {
+            $slug = $this->getSlug($form_data['name']);
+            $form_data['slug'] = $slug;
+        }
+
+        $tag->update($form_data);
+
+        return redirect()->route('admin.tags.show', $tag->id);
     }
 
     /**
