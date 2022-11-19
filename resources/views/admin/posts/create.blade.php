@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    <form action="{{ route('admin.posts.store') }}" method="POST">
+    <form action="{{ route('admin.posts.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
 
         {{-- Titolo post --}}
@@ -66,6 +66,12 @@
                 <label>{{ $tag->name }}</label>
             @endforeach
 
+        </div>
+
+        {{-- Caricamento immagine post --}}
+        <div @error('image') class="is-invalid" @enderror>
+            <label for="image">Carica immagine: </label>
+            <input type="file" name="image">
         </div>
 
         {{-- Invio del form --}}
