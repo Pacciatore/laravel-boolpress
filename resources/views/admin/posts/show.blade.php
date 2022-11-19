@@ -11,6 +11,12 @@
         <p>Nessuna categoria</p>
     @endif
 
+    @if ($post->cover_path)
+        <div class="img-container">
+            <img class="img-fluid" src="{{ asset('storage/' . $post->cover_path) }}" alt="{{ $post->title }}">
+        </div>
+    @endif
+
     <p> {{ $post->content }} </p>
 
     <div class="tags">
@@ -27,7 +33,8 @@
 
     {{-- Pulsante per l'eliminazione di un post --}}
     <div class="mt-2">
-        <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.posts.destroy', $post->id) }}" method="POST">
+        <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.posts.destroy', $post->id) }}"
+            method="POST">
             @csrf
             @method('DELETE')
 
