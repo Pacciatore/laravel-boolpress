@@ -9,11 +9,12 @@
         </a>
     @endforeach
 
-
+    {{-- Pulsante edit categoria --}}
     <div class="mt-5">
-        <a href="{{ route('admin.categories.edit', $category->id) }}">Edit Category</a>
+        <a class="btn-secondary p-2" href="{{ route('admin.categories.edit', $category->id) }}">Edit Category</a>
     </div>
 
+    {{-- Pulsante eliminazione categoria --}}
     <div class="mt-2">
         <form onsubmit="return confirm('Are you sure?')" action="{{ route('admin.categories.destroy', $category->id) }}"
             method="POST">
@@ -25,7 +26,8 @@
 
     </div>
 
-    <div>
-        <a href="{{ route('admin.categories.index') }}">Back to Categories</a>
+    {{-- Pulsante per tornare a index delle categorie --}}
+    <div class="mt-2">
+        <a class="btn-primary p-2" href="{{ route('admin.categories.index') }}">Back to Categories</a>
     </div>
 @endsection
