@@ -9,15 +9,19 @@
 
             <div class="page-navigation my-2">
 
-                <button @click="go(paginatedPosts.first_page_url)">First Page</button>
+                <button :class="{ disable: !paginatedPosts.prev_page_url }"
+                    @click="go(paginatedPosts.first_page_url)">First Page</button>
 
-                <button @click="go(paginatedPosts.prev_page_url)">&lt;&lt;</button>
+                <button :class="{ disable: !paginatedPosts.prev_page_url }"
+                    @click="go(paginatedPosts.prev_page_url)">&lt;&lt;</button>
 
                 <span>{{ currentPage }}/{{ totalPages }}</span>
 
-                <button @click="go(paginatedPosts.next_page_url)">>></button>
+                <button :class="{ disable: !paginatedPosts.next_page_url }"
+                    @click="go(paginatedPosts.next_page_url)">>></button>
 
-                <button @click="go(paginatedPosts.last_page_url)">Last Page</button>
+                <button :class="{ disable: !paginatedPosts.next_page_url }"
+                    @click="go(paginatedPosts.last_page_url)">Last Page</button>
 
             </div>
 
@@ -62,5 +66,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+button.disable {
+    opacity: 0.5;
+    pointer-events: none;
+}
 </style>
