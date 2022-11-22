@@ -1940,6 +1940,43 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostListPaginatedComponent.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostListPaginatedComponent.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'PostListPaginatedComponent',
+  computed: {
+    posts: function posts() {
+      return this.paginatedPosts.data;
+    },
+    currentPage: function currentPage() {
+      return this.paginatedPosts.current_page;
+    },
+    totalPages: function totalPages() {
+      return this.paginatedPosts.last_page;
+    }
+  },
+  props: {
+    paginatedPosts: Object
+  },
+  methods: {
+    showPost: function showPost(id) {
+      this.$emit('clickedPost', id);
+    },
+    go: function go(url) {
+      this.$emit('requestPage', url);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostsComponent.vue?vue&type=script&lang=js&":
 /*!*************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostsComponent.vue?vue&type=script&lang=js& ***!
@@ -1951,51 +1988,57 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _PostComponent_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostComponent.vue */ "./resources/js/components/PostComponent.vue");
 /* harmony import */ var _PostListComponent_vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostListComponent.vue */ "./resources/js/components/PostListComponent.vue");
+/* harmony import */ var _PostListPaginatedComponent_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./PostListPaginatedComponent.vue */ "./resources/js/components/PostListPaginatedComponent.vue");
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'PostsComponent',
   components: {
     PostComponent: _PostComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-    PostListComponent: _PostListComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
+    PostListComponent: _PostListComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
+    PostListPaginatedComponent: _PostListPaginatedComponent_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   data: function data() {
     return {
-      posts: [],
+      posts: undefined,
       detail: undefined,
       errorMessage: '',
       loading: true
     };
   },
   mounted: function mounted() {
-    var _this = this;
     console.log('PostComponent exists');
-    axios.get('/api/posts').then(function (_ref) {
-      var data = _ref.data;
-      if (data.success) {
-        _this.posts = data.results;
-      } else {
-        _this.errorMessage = data.error;
-      }
-      _this.loading = false;
-    });
+    this.loadPage('/api/posts');
   },
   methods: {
     showPost: function showPost(id) {
-      var _this2 = this;
+      var _this = this;
       console.log(id);
       this.loading = true;
       axios.get('api/posts/' + id).then(function (response) {
         console.log(response);
-        _this2.detail = response.data.success ? response.data.results : undefined;
-        _this2.loading = false;
+        _this.detail = response.data.success ? response.data.results : undefined;
+        _this.loading = false;
       })["catch"](function (e) {
         console.log('errore: ', e);
-        _this2.loading = false;
+        _this.loading = false;
       });
     },
     showList: function showList() {
       this.detail = undefined;
+    },
+    loadPage: function loadPage(url) {
+      var _this2 = this;
+      axios.get(url).then(function (_ref) {
+        var data = _ref.data;
+        if (data.success) {
+          _this2.posts = data.results;
+        } else {
+          _this2.errorMessage = data.error;
+        }
+        _this2.loading = false;
+      });
     }
   }
 });
@@ -2076,6 +2119,64 @@ render._withStripped = true;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function render() {
+  var _vm = this,
+    _c = _vm._self._c;
+  return _c("div", [_vm.posts.length > 0 ? _c("div", [_vm._l(_vm.posts, function (post) {
+    return _c("div", {
+      key: post.id
+    }, [_c("span", {
+      on: {
+        click: function click($event) {
+          return _vm.showPost(post.id);
+        }
+      }
+    }, [_vm._v(_vm._s(post.title))])]);
+  }), _vm._v(" "), _c("div", {
+    staticClass: "page-navigation my-2"
+  }, [_c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.go(_vm.paginatedPosts.first_page_url);
+      }
+    }
+  }, [_vm._v("First Page")]), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.go(_vm.paginatedPosts.prev_page_url);
+      }
+    }
+  }, [_vm._v("<<")]), _vm._v(" "), _c("span", [_vm._v(_vm._s(_vm.currentPage) + "/" + _vm._s(_vm.totalPages))]), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.go(_vm.paginatedPosts.next_page_url);
+      }
+    }
+  }, [_vm._v(">>")]), _vm._v(" "), _c("button", {
+    on: {
+      click: function click($event) {
+        return _vm.go(_vm.paginatedPosts.last_page_url);
+      }
+    }
+  }, [_vm._v("Last Page")])])], 2) : _c("div", [_vm._v("\n        Nessun post da visualizzare :(\n    ")])]);
+};
+var staticRenderFns = [];
+render._withStripped = true;
+
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostsComponent.vue?vue&type=template&id=38048495&scoped=true&":
 /*!***********************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/PostsComponent.vue?vue&type=template&id=38048495&scoped=true& ***!
@@ -2092,12 +2193,13 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", {
     staticClass: "container py-2"
-  }, [_vm.loading ? _c("div", [_vm._v("...CARICAMENTO...")]) : _vm.errorMessage.length > 0 ? _c("div", [_vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n    ")]) : !_vm.detail ? _c("PostListComponent", {
+  }, [_vm.loading ? _c("div", [_vm._v("...CARICAMENTO...")]) : _vm.errorMessage.length > 0 ? _c("div", [_vm._v("\n        " + _vm._s(_vm.errorMessage) + "\n    ")]) : !_vm.detail ? _c("PostListPaginatedComponent", {
     attrs: {
-      posts: _vm.posts
+      paginatedPosts: _vm.posts
     },
     on: {
-      clickedPost: _vm.showPost
+      clickedPost: _vm.showPost,
+      requestPage: _vm.loadPage
     }
   }) : _c("div", [_c("PostComponent", {
     attrs: {
@@ -49917,6 +50019,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListComponent_vue_vue_type_template_id_0de80ee4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListComponent_vue_vue_type_template_id_0de80ee4_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/PostListPaginatedComponent.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/PostListPaginatedComponent.vue ***!
+  \****************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _PostListPaginatedComponent_vue_vue_type_template_id_d070634e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true& */ "./resources/js/components/PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true&");
+/* harmony import */ var _PostListPaginatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PostListPaginatedComponent.vue?vue&type=script&lang=js& */ "./resources/js/components/PostListPaginatedComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _PostListPaginatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _PostListPaginatedComponent_vue_vue_type_template_id_d070634e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _PostListPaginatedComponent_vue_vue_type_template_id_d070634e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "d070634e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/PostListPaginatedComponent.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/PostListPaginatedComponent.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/PostListPaginatedComponent.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListPaginatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./PostListPaginatedComponent.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostListPaginatedComponent.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListPaginatedComponent_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true&":
+/*!***********************************************************************************************************!*\
+  !*** ./resources/js/components/PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true& ***!
+  \***********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListPaginatedComponent_vue_vue_type_template_id_d070634e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??ref--6!../../../node_modules/vue-loader/lib??vue-loader-options!./PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/PostListPaginatedComponent.vue?vue&type=template&id=d070634e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListPaginatedComponent_vue_vue_type_template_id_d070634e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_loaders_templateLoader_js_ref_6_node_modules_vue_loader_lib_index_js_vue_loader_options_PostListPaginatedComponent_vue_vue_type_template_id_d070634e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

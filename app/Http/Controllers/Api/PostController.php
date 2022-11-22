@@ -17,10 +17,8 @@ class PostController extends Controller
     public function index()
     {
         //
-        $success = true;
-
         try {
-            $posts = Post::all();
+            $posts = Post::Paginate(3);
             $data = [
                 'results' => $posts,
                 'success' => true
