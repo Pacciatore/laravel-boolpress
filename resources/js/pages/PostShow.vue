@@ -1,21 +1,21 @@
 <template>
-    <div>
+    <div class="post-show">
         <div v-if="loading">
             ...caricamento...
         </div>
-        <div v-else>
+        <div class="container" v-else>
             <h2>{{ post.title }}</h2>
-            <div v-if="post.category">
+            <div class="category" v-if="post.category">
                 {{ post.category.name }}
             </div>
-            <div>
-                <span v-for="tag in post.tags" :key="tag.id">
+            <div class="tags">
+                <span class="tag" v-for="tag in post.tags" :key="tag.id">
                     {{ tag.name }}
                 </span>
             </div>
             <p>{{ post.content }}</p>
         </div>
-        <div>
+        <div class="container">
             <!--<router-link :to="{name:'posts-index'}">Back</router-link>-->
             <button @click="back">{{ backUrlLabel }}</button>
         </div>
@@ -97,5 +97,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.post-show {
 
+    background-color: aqua;
+
+    .category {
+        color: red;
+    }
+
+    .tags {
+        .tag {
+            color: blue;
+        }
+    }
+}
 </style>
