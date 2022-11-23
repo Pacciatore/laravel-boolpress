@@ -42,8 +42,9 @@ export default {
                 console.log(e);
             });
         },
-        showPost(id) {
-            console.log('hai cliccato il post con id: ', id)
+        showPost(slug) {
+            console.log('hai cliccato il post con slug:', slug);
+            this.$router.push('/posts/' + slug)
         }
 
     },
