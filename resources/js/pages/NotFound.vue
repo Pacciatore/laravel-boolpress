@@ -2,7 +2,7 @@
     <div>
         <h1>ERROR 404: PAGE NOT FOUND</h1>
 
-        <router-link to="/">Go to Home</router-link>
+        <router-link :to="{home}">Go to Home</router-link>
     </div>
 </template>
 <script>

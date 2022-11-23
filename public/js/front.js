@@ -1982,7 +1982,9 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("div", [_c("h1", [_vm._v("ERROR 404: PAGE NOT FOUND")]), _vm._v(" "), _c("router-link", {
     attrs: {
-      to: "/"
+      to: {
+        home: _vm.home
+      }
     }
   }, [_vm._v("Go to Home")])], 1);
 };
@@ -53055,7 +53057,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     component: _pages_Home_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
   }, {
     path: '/*',
-    name: 'NotFound',
+    name: 'notFound',
     component: _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }]
 });
