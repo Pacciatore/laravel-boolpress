@@ -1,24 +1,26 @@
 <template>
-    <div class="container py-2">
+    <main class="pt-5 pb-2 h-100">
+        <div class="container text-white">
 
-        <div v-if="loading">...CARICAMENTO...</div>
+            <div v-if="loading">...CARICAMENTO...</div>
 
-        <div v-else-if="errorMessage.length > 0">
-            {{ errorMessage }}
+            <div v-else-if="errorMessage.length > 0">
+                {{ errorMessage }}
+            </div>
+
+            <!-- <PostListComponent v-else-if="!detail" :posts="posts" @clickedPost="showPost" /> -->
+
+            <PostListPaginatedComponent v-else-if="!detail" :paginatedPosts="posts" @clickedPost="showPost"
+                @requestPage="loadPage" />
+
+            <div v-else>
+                <PostComponent :post="detail" />
+                <button @click="showList">BACK</button>
+            </div>
+
+
         </div>
-
-        <!-- <PostListComponent v-else-if="!detail" :posts="posts" @clickedPost="showPost" /> -->
-
-        <PostListPaginatedComponent v-else-if="!detail" :paginatedPosts="posts" @clickedPost="showPost"
-            @requestPage="loadPage" />
-
-        <div v-else>
-            <PostComponent :post="detail" />
-            <button @click="showList">BACK</button>
-        </div>
-
-
-    </div>
+    </main>
 </template>
 
 <script>
@@ -82,5 +84,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
+main {
+    background-color: #948e8e9a;
+}
 </style>
