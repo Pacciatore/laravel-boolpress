@@ -2234,8 +2234,10 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    this.loadPage('/api/posts');
+    var page = this.$route.query.page ? this.$route.query.page : 1;
+    this.loadPage('/api/posts?page=' + page); // this.$route.query.page || 1);
   },
+
   methods: {
     loadPage: function loadPage(url) {
       var _this = this;

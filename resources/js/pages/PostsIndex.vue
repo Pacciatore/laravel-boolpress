@@ -27,7 +27,8 @@ export default {
         }
     },
     mounted() {
-        this.loadPage('/api/posts');
+        const page = this.$route.query.page ? this.$route.query.page : 1;
+        this.loadPage('/api/posts?page=' + page); // this.$route.query.page || 1);
     },
     methods: {
         loadPage(url) {
