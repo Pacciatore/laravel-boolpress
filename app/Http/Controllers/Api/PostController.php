@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         //
         try {
-            $posts = Post::Paginate(3);
+            $posts = Post::Paginate(10);
             $data = [
                 'results' => $posts,
                 'success' => true

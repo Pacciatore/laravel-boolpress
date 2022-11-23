@@ -1,11 +1,14 @@
 <template>
     <div>
-        Home
+        <PostsComponent />
     </div>
 </template>
 <script>
+import PostsComponent from '../components/PostsComponent.vue';
+
 export default {
-    name: 'HomePage'
+    name: "HomePage",
+    components: { PostsComponent }
 }
 </script>
 <style lang="scss" scoped>
