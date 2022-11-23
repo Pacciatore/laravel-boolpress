@@ -1,7 +1,7 @@
 <template>
     <div>
 
-        <NavComponent />
+        <NavComponent :navElements="nav" />
 
         <router-view></router-view>
     </div>
@@ -13,7 +13,25 @@ import NavComponent from '../components/NavComponent.vue';
 
 export default {
     name: "App",
-    components: { NavComponent }
+    components: { NavComponent },
+    data() {
+        return {
+            nav: [
+                {
+                    path: '/',
+                    label: 'Home'
+                },
+                {
+                    path: '/about',
+                    label: 'About'
+                },
+                {
+                    path: '/contacts',
+                    label: 'Contacts'
+                },
+            ]
+        }
+    }
 }
 </script>
 

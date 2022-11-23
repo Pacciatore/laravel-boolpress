@@ -1909,7 +1909,10 @@ module.exports = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'NavComponent'
+  name: 'NavComponent',
+  props: {
+    navElements: Array
+  }
 });
 
 /***/ }),
@@ -1989,6 +1992,20 @@ __webpack_require__.r(__webpack_exports__);
   name: "App",
   components: {
     NavComponent: _components_NavComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      nav: [{
+        path: '/',
+        label: 'Home'
+      }, {
+        path: '/about',
+        label: 'About'
+      }, {
+        path: '/contacts',
+        label: 'Contacts'
+      }]
+    };
   }
 });
 
@@ -2010,22 +2027,16 @@ var render = function render() {
     _c = _vm._self._c;
   return _c("nav", {
     staticClass: "navbar"
-  }, [_c("router-link", {
-    staticClass: "nav-link",
-    attrs: {
-      to: "/"
-    }
-  }, [_vm._v("Home")]), _vm._v(" "), _c("router-link", {
-    staticClass: "nav-link",
-    attrs: {
-      to: "/about"
-    }
-  }, [_vm._v("About")]), _vm._v(" "), _c("router-link", {
-    staticClass: "nav-link",
-    attrs: {
-      to: "/contacts"
-    }
-  }, [_vm._v("Contacts")])], 1);
+  }, _vm._l(_vm.navElements, function (link, index) {
+    return _c("div", {
+      key: index,
+      staticClass: "nav-link"
+    }, [_c("router-link", {
+      attrs: {
+        to: link.path
+      }
+    }, [_vm._v(_vm._s(link.label))])], 1);
+  }), 0);
 };
 var staticRenderFns = [];
 render._withStripped = true;
@@ -2141,7 +2152,11 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_c("NavComponent"), _vm._v(" "), _c("router-view")], 1);
+  return _c("div", [_c("NavComponent", {
+    attrs: {
+      navElements: _vm.nav
+    }
+  }), _vm._v(" "), _c("router-view")], 1);
 };
 var staticRenderFns = [];
 render._withStripped = true;
