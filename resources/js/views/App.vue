@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div id="app">
 
         <NavComponent :navElements="nav" />
 
@@ -36,5 +36,11 @@ export default {
 </script>
 
 <style scoped lang="scss">
+#app {
+    height: 100vh;
 
+    :nth-child(2) {
+        height: 90%;
+    }
+}
 </style>
