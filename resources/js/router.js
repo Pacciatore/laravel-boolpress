@@ -10,7 +10,7 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     routes: [
         { path: '/', name: 'home', component: Home },
-        { path: '/*', name: 'NotFound', component: NotFound }
+        { path: '/*', name: 'notFound', component: NotFound }
     ]
 })
 
