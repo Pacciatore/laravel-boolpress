@@ -2263,10 +2263,14 @@ __webpack_require__.r(__webpack_exports__);
 var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
-  return _c("div", [_vm.posts.length > 0 ? _c("div", [_vm._l(_vm.posts, function (post) {
+  return _c("div", [_vm.posts.length > 0 ? _c("div", {
+    staticClass: "post-list-page"
+  }, [_vm._l(_vm.posts, function (post) {
     return _c("div", {
-      key: post.id
+      key: post.id,
+      staticClass: "post"
     }, [_c("span", {
+      staticClass: "post-title",
       on: {
         click: function click($event) {
           return _vm.showPost(post.id);
@@ -6882,7 +6886,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "button.disable[data-v-d070634e] {\n  opacity: 0.5;\n  pointer-events: none;\n}", ""]);
+exports.push([module.i, ".post-list-page .post .post-title[data-v-d070634e]:hover {\n  cursor: pointer;\n}\n.post-list-page .page-navigation button.disable[data-v-d070634e] {\n  opacity: 0.5;\n  pointer-events: none;\n}", ""]);
 
 // exports
 

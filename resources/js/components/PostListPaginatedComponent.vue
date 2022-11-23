@@ -1,10 +1,10 @@
 <template>
     <div>
 
-        <div v-if="posts.length > 0">
+        <div class="post-list-page" v-if="posts.length > 0">
 
-            <div v-for="post in posts" :key="post.id">
-                <span @click="showPost(post.id)">{{ post.title }}</span>
+            <div class="post" v-for="post in posts" :key="post.id">
+                <span class="post-title" @click="showPost(post.id)">{{ post.title }}</span>
             </div>
 
             <div class="page-navigation my-2">
@@ -27,11 +27,10 @@
 
         </div>
 
+        <!-- Error message: 'Nessun post da visualizzare :(' -->
         <div v-else>
             Nessun post da visualizzare :(
         </div>
-
-
 
     </div>
 </template>
@@ -66,8 +65,20 @@ export default {
 </script>
 
 <style scoped lang="scss">
-button.disable {
-    opacity: 0.5;
-    pointer-events: none;
+.post-list-page {
+    .post {
+        .post-title {
+            &:hover {
+                cursor: pointer;
+            }
+        }
+    }
+
+    .page-navigation {
+        button.disable {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
 }
 </style>
