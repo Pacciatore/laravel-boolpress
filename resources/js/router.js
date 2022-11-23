@@ -5,6 +5,9 @@ import HomePage from './pages/HomePage.vue';
 import AboutPage from './pages/AboutPage.vue';
 import ContactsPage from './pages/ContactsPage.vue';
 
+import PostsIndex from './pages/PostsIndex.vue';
+import PostShow from './components/PostComponent.vue';
+
 import NotFound from './pages/NotFound.vue';
 
 Vue.use(VueRouter);
@@ -12,6 +15,19 @@ Vue.use(VueRouter);
 const router = new VueRouter({
     routes: [
         { path: '/', name: 'home', component: HomePage },
+
+        {
+            path: "/posts",
+            name: "posts-index",
+            component: PostsIndex,
+        },
+        {
+            path: "/posts/:slug",
+            name: "posts-show",
+            component: PostShow,
+        },
+
+
         { path: '/about', name: 'about', component: AboutPage },
         { path: '/contacts', name: 'contacts', component: ContactsPage },
 

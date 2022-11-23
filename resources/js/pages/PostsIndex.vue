@@ -1,0 +1,59 @@
+<template>
+    <main class="pt-5 pb-2 h-100">
+        <div class="container text-white">
+
+            <div v-if="loading">...CARICAMENTO...</div>
+
+            <div v-else-if="errorMessage.length > 0">
+                {{ errorMessage }}
+            </div>
+
+            <PostListPaginatedComponent v-else :paginatedPosts="postPageResult" @clickedPost="showPost"
+                @requestPage="loadPage" />
+
+        </div>
+    </main>
+</template>
+<script>
+import PostListPaginatedComponent from '../components/PostListPaginatedComponent.vue';
+
+export default {
+    name: 'PostsIndex',
+    data() {
+        return {
+            postPageResult: undefined,
+            errorMessage: '',
+            loading: true
+        }
+    },
+    mounted() {
+        this.loadPage('/api/posts');
+    },
+    methods: {
+        loadPage(url) {
+            axios.get(url).then(({ data }) => {
+                if (data.success) {
+                    this.postPageResult = data.results;
+                } else {
+                    this.errorMessage = data.error;
+                }
+                this.loading = false;
+            }).catch(e => {
+                console.log(e);
+            });
+        },
+        showPost(id) {
+            console.log('hai cliccato il post con id: ', id)
+        }
+
+    },
+    components: {
+        PostListPaginatedComponent
+    }
+}
+</script>
+<style lang="scss" scoped>
+main {
+    background-color: #948e8e9a;
+}
+</style>

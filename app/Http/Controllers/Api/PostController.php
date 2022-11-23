@@ -18,7 +18,7 @@ class PostController extends Controller
     {
         //
         try {
-            $posts = Post::Paginate(10);
+            $posts = Post::where('id', '>', 0)->paginate(15);
             $data = [
                 'results' => $posts,
                 'success' => true

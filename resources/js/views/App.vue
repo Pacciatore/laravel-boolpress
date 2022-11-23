@@ -22,6 +22,10 @@ export default {
                     label: 'Home'
                 },
                 {
+                    path: '/posts',
+                    label: 'Blog'
+                },
+                {
                     path: '/about',
                     label: 'About'
                 },
