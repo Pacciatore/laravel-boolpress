@@ -4,24 +4,24 @@
         <div class="post-list-page" v-if="posts.length > 0">
 
             <div class="post" v-for="post in posts" :key="post.id">
-                <span class="post-title" @click="showPost(post.id)">{{ post.title }}</span>
+                <span class="post-title" @click="showPost(post.slug)">{{ post.title }}</span>
             </div>
 
             <div class="page-navigation my-2">
 
                 <button :class="{ disable: !paginatedPosts.prev_page_url }"
-                    @click="go(paginatedPosts.first_page_url)">First Page</button>
+                    @click="go(paginatedPosts.first_page_url, 1)">First Page</button>
 
                 <button :class="{ disable: !paginatedPosts.prev_page_url }"
-                    @click="go(paginatedPosts.prev_page_url)">&lt;&lt;</button>
+                    @click="go(paginatedPosts.prev_page_url, currentPage - 1)">&lt;&lt;</button>
 
                 <span>{{ currentPage }}/{{ totalPages }}</span>
 
                 <button :class="{ disable: !paginatedPosts.next_page_url }"
-                    @click="go(paginatedPosts.next_page_url)">>></button>
+                    @click="go(paginatedPosts.next_page_url, currentPage + 1)">>></button>
 
                 <button :class="{ disable: !paginatedPosts.next_page_url }"
-                    @click="go(paginatedPosts.last_page_url)">Last Page</button>
+                    @click="go(paginatedPosts.last_page_url, totalPages)">Last Page</button>
 
             </div>
 
@@ -53,11 +53,15 @@ export default {
         paginatedPosts: Object
     },
     methods: {
-        showPost(id) {
-            this.$emit('clickedPost', id);
+        showPost(slug) {
+            this.$emit('clickedPost', slug);
         },
-        go(url) {
-            this.$emit('requestPage', url);
+        go(url, pageNumber) {
+            console.log('url:', url);
+            if (url) {
+                this.$router.push({ path: '/posts', query: { page: pageNumber } })
+                this.$emit('requestPage', url)
+            }
         }
     },
 }
