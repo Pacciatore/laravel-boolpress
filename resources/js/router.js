@@ -1,7 +1,9 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Home from './pages/Home.vue';
+import HomePage from './pages/HomePage.vue';
+import AboutPage from './pages/AboutPage.vue';
+import ContactsPage from './pages/ContactsPage.vue';
 
 import NotFound from './pages/NotFound.vue';
 
@@ -9,7 +11,10 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
-        { path: '/', name: 'home', component: Home },
+        { path: '/', name: 'home', component: HomePage },
+        { path: '/about', name: 'about', component: AboutPage },
+        { path: '/contacts', name: 'contacts', component: ContactsPage },
+
         { path: '/*', name: 'notFound', component: NotFound }
     ]
 })
