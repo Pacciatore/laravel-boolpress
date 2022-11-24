@@ -2319,7 +2319,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("nav", {
-    staticClass: "navbar"
+    staticClass: "navbar justify-content-evenly"
   }, _vm._l(_vm.navElements, function (link, index) {
     return _c("div", {
       key: index,
@@ -2657,7 +2657,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("main", {
-    staticClass: "pt-5 pb-2 h-100"
+    staticClass: "pt-5 pb-2"
   }, [_c("div", {
     staticClass: "container text-white"
   }, [_vm.loading ? _c("div", [_vm._v("...CARICAMENTO...")]) : _vm.errorMessage.length > 0 ? _c("div", [_vm._v("\n            " + _vm._s(_vm.errorMessage) + "\n        ")]) : _c("PostListPaginatedComponent", {
@@ -7179,7 +7179,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#app[data-v-91ac6b5c] {\n  height: 100vh;\n}\n#app[data-v-91ac6b5c] :nth-child(2) {\n  height: 90%;\n}", ""]);
+exports.push([module.i, "#app[data-v-91ac6b5c] {\n  height: 100vh;\n}\n#app *[data-v-91ac6b5c]:nth-child(2) {\n  height: 90%;\n}", ""]);
 
 // exports
 

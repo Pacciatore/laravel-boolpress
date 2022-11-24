@@ -1,5 +1,5 @@
 <template>
-    <main class="pt-5 pb-2 h-100">
+    <main class="pt-5 pb-2">
         <div class="container text-white">
 
             <div v-if="loading">...CARICAMENTO...</div>

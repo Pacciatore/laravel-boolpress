@@ -43,7 +43,7 @@ export default {
 #app {
     height: 100vh;
 
-    :nth-child(2) {
+    *:nth-child(2) {
         height: 90%;
     }
 }
