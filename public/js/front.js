@@ -55353,7 +55353,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   routes: [{
     path: '/',
     name: 'home',
-    component: _pages_HomePage_vue__WEBPACK_IMPORTED_MODULE_2__["default"]
+    component: _pages_PostsIndex_vue__WEBPACK_IMPORTED_MODULE_5__["default"] /*HomePage : al momento voglio vedere i post anche in home*/
   }, {
     path: "/posts",
     name: "posts-index",

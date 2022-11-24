@@ -14,7 +14,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
-        { path: '/', name: 'home', component: HomePage },
+        { path: '/', name: 'home', component: PostsIndex /*HomePage : al momento voglio vedere i post anche in home*/ },
         {
             path: "/posts",
             name: "posts-index",
