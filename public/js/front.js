@@ -2249,6 +2249,9 @@ __webpack_require__.r(__webpack_exports__);
           _this.postPageResult = data.results;
         } else {
           _this.errorMessage = data.error;
+          _this.$router.push({
+            name: 'notFound'
+          });
         }
         _this.loading = false;
       })["catch"](function (e) {
@@ -2590,7 +2593,7 @@ var render = function render() {
   return _c("div", [_c("h1", [_vm._v("ERROR 404: PAGE NOT FOUND")]), _vm._v(" "), _c("router-link", {
     attrs: {
       to: {
-        home: _vm.home
+        name: "home"
       }
     }
   }, [_vm._v("Go to Home")])], 1);
@@ -55371,7 +55374,8 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: 'contacts',
     component: _pages_ContactsPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
-    path: '/*',
+    path: '/404',
+    alias: '*',
     name: 'notFound',
     component: _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
   }]

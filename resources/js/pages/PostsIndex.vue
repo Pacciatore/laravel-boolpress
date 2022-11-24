@@ -37,6 +37,7 @@ export default {
                     this.postPageResult = data.results;
                 } else {
                     this.errorMessage = data.error;
+                    this.$router.push({ name: 'notFound' });
                 }
                 this.loading = false;
             }).catch(e => {
