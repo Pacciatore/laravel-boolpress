@@ -1988,7 +1988,7 @@ __webpack_require__.r(__webpack_exports__);
       this.$emit('clickedPost', slug);
     },
     go: function go(url, pageNumber) {
-      console.log('url:', url);
+      console.log('go to url:', url);
       if (url) {
         this.$router.push({
           path: '/posts',

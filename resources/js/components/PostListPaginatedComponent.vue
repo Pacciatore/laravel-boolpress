@@ -57,7 +57,7 @@ export default {
             this.$emit('clickedPost', slug);
         },
         go(url, pageNumber) {
-            console.log('url:', url);
+            console.log('go to url:', url);
             if (url) {
                 this.$router.push({ path: '/posts', query: { page: pageNumber } })
                 this.$emit('requestPage', url)

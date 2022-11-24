@@ -23,7 +23,7 @@ class PostController extends Controller
                 'results' => $posts,
                 'success' => count($posts) > 0
             ];
-        } catch (Error $e) {
+        } catch (\Exception $e) {
             $data = [
                 'error' => $e->message,
                 'success' => false
