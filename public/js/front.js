@@ -2161,9 +2161,10 @@ __webpack_require__.r(__webpack_exports__);
     this.loadPage('api/posts/' + slug);
   },
   beforeRouteEnter: function beforeRouteEnter(to, from, next) {
-    console.log(to, from);
+    // console.log(to, from);
+
     next(function (vueComponent) {
-      console.log(vueComponent);
+      // console.log(vueComponent);
       vueComponent.backUrl = from.name ? from.fullPath : '/posts';
       vueComponent.backUrlLabel = from.name ? 'BACK' : 'BLOG';
     });
@@ -2185,13 +2186,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     loadPage: function loadPage(url) {
       var _this = this;
-      console.log(url);
+      // console.log(url);
+
       axios.get(url).then(function (_ref) {
         var data = _ref.data;
         if (data.success) {
-          console.log('data', data);
+          // console.log('data', data)
           _this.post = data.results;
-          console.log(_this.post);
+          // console.log(this.post)
         } else {
           //  this.errorMessage = data.error;
           _this.$router.push({
@@ -2205,7 +2207,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     back: function back() {
       // this.$router.go(-1); // ritorna indietro nella history della webapp
-      console.log('backUrl', this.backUrl);
+      // console.log('backUrl', this.backUrl)
       this.$router.push(this.backUrl);
     }
   }
@@ -2254,7 +2256,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     showPost: function showPost(slug) {
-      console.log('hai cliccato il post con slug:', slug);
+      // console.log('hai cliccato il post con slug:', slug);
       this.$router.push('/posts/' + slug);
     }
   },
@@ -2614,7 +2616,7 @@ var render = function render() {
   var _vm = this,
     _c = _vm._self._c;
   return _c("div", {
-    staticClass: "post-show"
+    staticClass: "post-show pt-5 pb-2"
   }, [_vm.loading ? _c("div", [_vm._v("\n        ...caricamento...\n    ")]) : _c("div", {
     staticClass: "container"
   }, [_c("h2", [_vm._v(_vm._s(_vm.post.title))]), _vm._v(" "), _vm.post.category ? _c("div", {

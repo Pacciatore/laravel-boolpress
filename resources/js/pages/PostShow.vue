@@ -1,5 +1,5 @@
 <template>
-    <div class="post-show">
+    <div class="post-show pt-5 pb-2">
         <div v-if="loading">
             ...caricamento...
         </div>
@@ -40,10 +40,10 @@ export default {
 
     },
     beforeRouteEnter(to, from, next) {
-        console.log(to, from);
+        // console.log(to, from);
 
         next(vueComponent => {
-            console.log(vueComponent);
+            // console.log(vueComponent);
             vueComponent.backUrl = from.name ? from.fullPath : '/posts';
             vueComponent.backUrlLabel = from.name ? 'BACK' : 'BLOG';
 
@@ -70,13 +70,13 @@ export default {
     */
     methods: {
         loadPage(url) {
-            console.log(url);
+            // console.log(url);
 
             axios.get(url).then(({ data }) => {
                 if (data.success) {
-                    console.log('data', data)
+                    // console.log('data', data)
                     this.post = data.results;
-                    console.log(this.post)
+                    // console.log(this.post)
                 } else {
                     //  this.errorMessage = data.error;
                     this.$router.push({ name: 'NotFound' });
@@ -89,7 +89,7 @@ export default {
         back() {
 
             // this.$router.go(-1); // ritorna indietro nella history della webapp
-            console.log('backUrl', this.backUrl)
+            // console.log('backUrl', this.backUrl)
             this.$router.push(this.backUrl);
         }
     }
