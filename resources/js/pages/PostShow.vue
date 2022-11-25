@@ -1,24 +1,37 @@
 <template>
     <div class="post-show pt-5 pb-2">
+
         <div v-if="loading">
             ...caricamento...
         </div>
+
         <div class="container" v-else>
+
             <h2>{{ post.title }}</h2>
+
             <div class="category" v-if="post.category">
                 {{ post.category.name }}
             </div>
+
             <div class="tags">
                 <span class="tag" v-for="tag in post.tags" :key="tag.id">
                     {{ tag.name }}
                 </span>
             </div>
+
+            <div v-if="post.cover_path" class="img-container">
+                <img class="img-fluid" :src="'storage/' + post.cover_path" :alt="post.slug">
+            </div>
+
             <p>{{ post.content }}</p>
+
         </div>
+
         <div class="container">
             <!--<router-link :to="{name:'posts-index'}">Back</router-link>-->
             <button @click="back">{{ backUrlLabel }}</button>
         </div>
+
     </div>
 </template>
 
