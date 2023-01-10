@@ -1,46 +1,42 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import HomePage from './pages/HomePage.vue';
-import AboutPage from './pages/AboutPage.vue';
-import ContactsPage from './pages/ContactsPage.vue';
-
-import PostsIndex from './pages/PostsIndex.vue';
-import PostShow from './pages/PostShow.vue';
-
-import NotFound from './pages/NotFound.vue';
 
 Vue.use(VueRouter);
 
 const router = new VueRouter({
     routes: [
-        { path: '/', name: 'home', component: PostsIndex /*HomePage : al momento voglio vedere i post anche in home*/ },
+        {
+            path: '/',
+            name: 'home',
+            component: () => import(/* webpackChunkName: "homePage" */ './pages/HomePage.vue')
+        },
         {
             path: "/posts",
             name: "posts-index",
-            component: PostsIndex,
+            component: () => import(/* webpackChunkName: "index" */ './pages/PostsIndex.vue')
         },
         {
             path: "/posts/:slug",
             name: "posts-show",
-            component: PostShow,
+            component: () => import(/* webpackChunkName: "postShow" */ './pages/PostShow.vue'),
         },
         {
             path: '/about',
             name: 'about',
-            component: AboutPage
+            component: () => import(/* webpackChunkName: "about" */ './pages/AboutPage.vue')
         },
         {
             path: '/contacts',
             name: 'contacts',
-            component: ContactsPage
+            component: () => import(/* webpackChunkName: "contacts" */ './pages/ContactsPage.vue')
         },
 
         {
             path: '/404',
             alias: '*',
             name: 'notFound',
-            component: NotFound
+            component: () => import(/* webpackChunkName: "notFound" */ './pages/NotFound.vue')
         }
     ]
 })

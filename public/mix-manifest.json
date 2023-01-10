@@ -1,5 +1,11 @@
 {
     "/js/back.js": "/js/back.js",
     "/js/front.js": "/js/front.js",
-    "/css/app.css": "/css/app.css"
+    "/css/app.css": "/css/app.css",
+    "/about.js": "/about.js",
+    "/contacts.js": "/contacts.js",
+    "/notFound.js": "/notFound.js",
+    "/index.js": "/index.js",
+    "/homePage.js": "/homePage.js",
+    "/postShow.js": "/postShow.js"
 }
